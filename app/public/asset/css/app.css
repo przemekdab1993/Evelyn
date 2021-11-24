@@ -1,0 +1,10 @@
+.box-content {
+    background-color: #B0413E;
+    border: 1px solid #5eb5e0;
+}
+body {
+    margin: 0;
+    padding: 0px;
+    background-color: black;
+    color: #DDDDDD;
+}
