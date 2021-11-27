@@ -112,8 +112,14 @@
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "knplabs/knp-markdown-bundle": {
+        "version": "1.9.0"
+    },
     "laminas/laminas-code": {
         "version": "4.4.3"
+    },
+    "michelf/php-markdown": {
+        "version": "1.9.1"
     },
     "myclabs/deep-copy": {
         "version": "1.10.2"
