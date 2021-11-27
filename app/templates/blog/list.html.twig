@@ -1,29 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Głosowanie{% endblock %}
+{% block title %}Lista artykułów{% endblock %}
 
 {% block body %}
     <div class="box-content">
-        <h1>Witaj na głosowaniu.</h1>
-        <p>W tym głosowaniu wybieramy przedstawiciela naszej grupy.</p>
+        <h1>Lista artykułów</h1>
     </div>
 
     <div class="box-content-2">
-        <h3>Oto lista kandydatów. Oddaj swój głos.</h3>
-        <ul class="vote-list">
-            {% for user in votes %}
-                <li id="vote-user-{{ user.id }}">
-                    {{ user.name }}
-                    <span class="count-vote"> {{ user.vote }}</span>
-                    <span><a class="vote-up" href="#" data-user-id="{{ user.id }}" data-direction="up">up(+)</a></span>
-                    /
-                    <span><a class="vote-down" href="#" data-user-id="{{ user.id }}" data-direction="down">down(-)</a></span>
-                </li>
-            {% endfor %}
+        <ul class="blog-list">
+            <li>
+                <div class="blog-list-element">
+                    <h2>Tytuł artykułu 1</h2>
+                    <p>Fun fact! Witches & wizards love writing markdown. I have no idea why... but darnit! We're going to give the people what they want!</p>
+                    <a href="/blog/show/1"><span>Zobacz więcej &raquo;</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="blog-list-element">
+                    <h2>Tytuł artykułu 2</h2>
+                    <p>Fun fact! Witches & wizards love writing markdown. I have no idea why... but darnit! We're going to give the people what they want!</p>
+                    <a href="/blog/show/2"><span>Zobacz więcej &raquo;</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="blog-list-element">
+                    <h2>Tytuł artykułu 3</h2>
+                    <p>Fun fact! Witches & wizards love writing markdown. I have no idea why... but darnit! We're going to give the people what they want!</p>
+                    <a href="/blog/show/3"><span>Zobacz więcej &raquo;</span></a>
+                </div>
+            </li>
+            <li>
+                <div class="blog-list-element">
+                    <h2>Tytuł artykułu 4</h2>
+                    <p>Fun fact! Witches & wizards love writing markdown. I have no idea why... but darnit! We're going to give the people what they want!</p>
+                    <a href="/blog/show/3"><span>Zobacz więcej &raquo;</span></a>
+                </div>
+            </li>
         </ul>
     </div>
 {% endblock %}
 
 {% block javascripts_end %}
-    <script type="text/javascript" src="{{ asset('asset/js/vote.js') }}"></script>
 {% endblock %}
