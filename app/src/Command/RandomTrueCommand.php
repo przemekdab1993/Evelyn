@@ -19,25 +19,27 @@ class RandomTrueCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->setDescription("Losowanie orzeł czy reszka")
+            ->addArgument('your-name', InputArgument::OPTIONAL, 'Your name')
+            ->addOption('quiz', null, InputOption::VALUE_NONE, 'Zgadnij co')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $arg1 = $input->getArgument('arg1');
+        $yourName = $input->getArgument('your-name');
 
-        if ($arg1) {
-            $io->note(sprintf('You passed an argument: %s', $arg1));
+        if ($yourName) {
+            $io->note(sprintf('Witaj: %s', $yourName));
         }
 
-        if ($input->getOption('option1')) {
+        if ($input->getOption('quiz')) {
             // ...
         }
+        $result = 'true';
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('To nie żadne losowanie baranie. Odpowiedź brzmi "true"');
 
         return Command::SUCCESS;
     }
