@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Service\MarkDownHelper;
 use Knp\Bundle\MarkdownBundle\MarkdownParserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ class BlogController extends AbstractController
     }
 
     #[Route('/blog/show/{docId}', name: 'blog_show')]
-    public function show($docId = 1, MarkdownParserInterface $markdownParser, CacheInterface $cache): Response
+    public function show($docId = 1, MarkDownHelper $markDownHelper): Response
     {
         $docContent = [
             'id' => 1,
@@ -28,14 +29,9 @@ class BlogController extends AbstractController
             'text' => "Many users already have `downloaded` jQuery from Google when visiting another site. As a result, it will be loaded from cache when they visit your site, which leads to faster loading time. Also, most CDN's will make sure that once a user requests a file from it, it will be served from the server closest to them, which also leads to faster loading time."
         ];
 
-        $docContent['lead'] = $cache->get('markdown_'.md5($docContent['lead']), function() use ($markdownParser, $docContent ) {
-            return $markdownParser->transformMarkdown($docContent['lead']);
-        });
+        $docContent['lead'] = $markDownHelper->parser($docContent['lead']);
 
-        $docContent['text'] = $cache->get('markdown_'.md5($docContent['text']), function() use ($markdownParser, $docContent) {
-            return $markdownParser->transformMarkdown($docContent['text']);
-        });
-
+        $docContent['text'] = $markDownHelper->parser($docContent['text']);
 
         return $this->render('blog/show.html.twig', [
             'doc' => $docContent,
