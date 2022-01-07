@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Doc;
+use App\Repository\DocRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,11 +11,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DocController extends AbstractController
 {
-    #[Route('/doc', name: 'doc')]
-    public function index(): Response
+    #[Route('/doc/list', name: 'docList')]
+    public function index(DocRepository $docRepository): Response
     {
+
+        $docList = $docRepository->findListDoc();
+
+
         return $this->render('doc/index.html.twig', [
-            'controller_name' => 'DocController',
+            'docList' => $docList,
         ]);
     }
 
@@ -32,10 +37,25 @@ class DocController extends AbstractController
         $entityManager->persist($newDoc);
         $entityManager->flush();
 
-        dd($newDoc);
 
         return $this->render('doc/newDoc.html.twig', [
             'controller_name' => 'DocController',
+        ]);
+    }
+
+    #[Route('/doc/show/{docId}')]
+    public function show($docId, EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Doc::class);
+
+        $docOne = $repository->findOneBy(['id'=>$docId, 'active'=>true]);
+
+        if (!$docOne) {
+            throw $this->createNotFoundException('Wybrana strona nie została odnaleziona');
+        }
+
+        return $this->render('doc/show.html.twig', [
+            'doc' => $docOne,
         ]);
     }
 }

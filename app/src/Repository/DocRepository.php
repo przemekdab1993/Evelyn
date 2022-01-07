@@ -19,6 +19,23 @@ class DocRepository extends ServiceEntityRepository
         parent::__construct($registry, Doc::class);
     }
 
+    /**
+    * @return Doc[] Returns an array of Doc objects
+    */
+
+    public function findListDoc()
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.active = :active')
+            ->setParameter('active', true)
+            ->orderBy('d.createdDate', 'DESC')
+            ->setMaxResults(100)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
     // /**
     //  * @return Doc[] Returns an array of Doc objects
     //  */

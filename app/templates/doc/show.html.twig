@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ doc.title }} - Artykuł {% endblock %}
+
+{% block body %}
+    <div class="box-content">
+        <h1>Treść Artykułu</h1>
+    </div>
+
+    <div class="box-content-2">
+        <div class="blog-doc-content">
+            <div class="blog-title">
+                <h2>{{ doc.title }}</h2>
+                {% if doc.lead %}
+                    <span>{{ doc.lead }}</span>
+                {% endif %}
+            </div>
+            <div class="blog-content">
+                <p>{{ doc.content }}</p>
+            </div>
+            <div class="blog-bar">
+                <div class="blog-bar">
+                    <span>Data dodania: </span>{{ doc.createdDate | date("d-m-Y") }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+{% endblock %}
