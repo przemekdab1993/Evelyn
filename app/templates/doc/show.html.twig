@@ -19,10 +19,18 @@
                 <p>{{ doc.content }}</p>
             </div>
             <div class="blog-bar">
-                <div class="blog-bar">
+                <div class="blog-bar-date">
                     <span>Data dodania: </span>{{ doc.createdDate | date("d-m-Y") }}
                 </div>
+                <div class="blog-rating">
+                    <h4>Oceń artykuł <span class="rating-good">{{ doc.docRating.goodString('good') }}</span> / <span class="rating-bad">{{ doc.docRating.goodString('bad') }} </span></h4>
+                    <form name="vote" action="{{ path('docVote', { "docId": doc.id }) }}" method="POST">
+                        <button class="link-rating link-rating-good" name="ratingType" value="good"><span>Podoba mi się</span></button>
+                        <button class="link-rating link-rating-bad" name="ratingType" value="bad"><span>Nie podoba mi się</span></button>
+                    </form>
+                </div>
             </div>
+
         </div>
     </div>
 {% endblock %}

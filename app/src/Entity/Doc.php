@@ -47,6 +47,11 @@ class Doc
      */
     private $active;
 
+    /**
+     * @ORM\OneToOne(targetEntity=DocRating::class, mappedBy="docId", cascade={"persist", "remove"})
+     */
+    private $docRating;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +125,28 @@ class Doc
     public function setActive(bool $active): self
     {
         $this->active = $active;
+
+        return $this;
+    }
+
+    public function getDocRating(): ?DocRating
+    {
+        return $this->docRating;
+    }
+
+    public function setDocRating(?DocRating $docRating): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($docRating === null && $this->docRating !== null) {
+            $this->docRating->setDocId(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($docRating !== null && $docRating->getDocId() !== $this) {
+            $docRating->setDocId($this);
+        }
+
+        $this->docRating = $docRating;
 
         return $this;
     }

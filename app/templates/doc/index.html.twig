@@ -12,15 +12,15 @@
         <ul class="blog-list">
             {% for doc in docList %}
                 <div class="blog-list-element">
-                    <div class="blog-title">
-                        <h2>{{ doc.title }}</h2>
-                        {% if doc.lead %}
-                        <span>{{ doc.lead }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="blog-content">
-                        <p>{{ doc.content }}</p>
-                    </div>
+                    <a href="/doc/show/{{ doc.id }}">
+                        <div class="blog-title">
+                            <h2>{{ doc.title }}</h2>
+                            {% if doc.lead %}
+                            <span>{{ doc.lead }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="read-more">Czytaj więcej &raquo;</span>
+                    </a>
                     <div class="blog-bar">
                         <div class="blog-bar">
                             {% if doc.createdDate | date() >=  "now - 1 days" | date() %}
@@ -30,7 +30,6 @@
                             {% endif %}
                         </div>
                     </div>
-                    <a href="/doc/show/{{ doc.id }}"><span>Zobacz więcej &raquo;</span></a>
                 </div>
             {% endfor %}
         </ul>
