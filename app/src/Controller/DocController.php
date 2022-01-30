@@ -49,7 +49,7 @@ class DocController extends AbstractController
         ]);
     }
 
-    #[Route('/doc/show/{docId}')]
+    #[Route('/doc/show/{docId}', name: 'docShow')]
     public function show($docId, EntityManagerInterface $entityManager): Response
     {
         $repository = $entityManager->getRepository(Doc::class);
@@ -105,16 +105,15 @@ class DocController extends AbstractController
 
             $docRating = $repository->findByDocId($docId);
 
-            if ($ratingType == 'good') {
-                $docRating->setGood($docRating->getGood() + 1);
-            } elseif ($ratingType == 'bad') {
-                $docRating->setBad($docRating->getBad() + 1);
+            if ($ratingType === 'good') {
+                $docRating->upVoteGood();
+            } elseif ($ratingType === 'bad') {
+                $docRating->upVoteBad();
             }
 
-            $entityManager->persist($docRating);
             $entityManager->flush();
 
-            return $this->redirect(sprintf('/doc/show/%s', $docId));
+            return $this->redirectToRoute('docShow', ['docId'=>$docId]);
 
         } else {
             throw $this->createNotFoundException('Wybrana strona nie została odnaleziona');

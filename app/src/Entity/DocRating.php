@@ -49,7 +49,7 @@ class DocRating
         return $this;
     }
 
-    public function getGood(): ?int
+    public function getGood(): int
     {
         return $this->good;
     }
@@ -73,7 +73,7 @@ class DocRating
         return $this;
     }
 
-    public function getBad(): ?int
+    public function getBad(): int
     {
         return $this->bad;
     }
@@ -81,6 +81,17 @@ class DocRating
     public function setBad(int $bad): self
     {
         $this->bad = $bad;
+
+        return $this;
+    }
+
+    public function upVoteGood() {
+        $this->good = ++$this->good;
+
+        return $this;
+    }
+    public function upVoteBad() {
+        $this->bad++;
 
         return $this;
     }

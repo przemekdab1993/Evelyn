@@ -12,7 +12,7 @@
         <ul class="blog-list">
             {% for doc in docList %}
                 <div class="blog-list-element">
-                    <a href="/doc/show/{{ doc.id }}">
+                    <a href="{{ path('docShow', { "docId": doc.id }) }}">
                         <div class="blog-title">
                             <h2>{{ doc.title }}</h2>
                             {% if doc.lead %}
