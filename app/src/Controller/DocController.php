@@ -28,20 +28,19 @@ class DocController extends AbstractController
     #[Route('/doc/new', name: 'docNew')]
     public function new(EntityManagerInterface $entityManager): Response
     {
-        $newDoc = new Doc();
-        $newDocRating = new DocRating();
-
-        $newDoc->setTitle('Nowy dokument')
-            ->setLead('lead')
-            ->setContent('Napis ćwiczebny')
-            ->setCreatedDate(new \DateTime())
-            ->setActive(true)
-            ->setDocRating($newDocRating);
-
-        $entityManager->persist($newDoc);
-
-        //dd($newDoc);
-        $entityManager->flush();
+//        $newDoc = new Doc();
+//        $newDocRating = new DocRating();
+//
+//        $newDoc->setTitle('Nowy dokument')
+//            ->setLead('lead')
+//            ->setContent('Napis ćwiczebny')
+//            ->setCreatedDate(new \DateTime())
+//            ->setActive(true)
+//            ->setDocRating($newDocRating);
+//
+//        $entityManager->persist($newDoc);
+//
+//        $entityManager->flush();
 
 
         return $this->render('doc/newDoc.html.twig', [

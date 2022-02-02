@@ -38,7 +38,8 @@
         "symfony/css-selector": "5.3.*",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "5.3.*",
-        "symfony/web-profiler-bundle": "5.3.*"
+        "symfony/web-profiler-bundle": "5.3.*",
+        "zenstruck/foundry": "^1.16"
     },
     "config": {
         "optimize-autoloader": true,
