@@ -4,12 +4,16 @@ namespace App\Entity;
 
 use App\Repository\DocRatingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableDocument;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 /**
  * @ORM\Entity(repositoryClass=DocRatingRepository::class)
  */
 class DocRating
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
