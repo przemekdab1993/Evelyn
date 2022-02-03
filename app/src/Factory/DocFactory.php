@@ -40,11 +40,11 @@ final class DocFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'title' => 'Nowy dokument',
-            'lead' => 'Dicta nostrum voluptatibus placeat temporibus omnis.',
-            'content' => self::faker()->text(),
-            'createdDate' => new \DateTime(),
-            'docRating' => new DocRating(),
+            'title' => self::faker()->realText(128),
+            'lead' => self::faker()->realText(512),
+            'content' => self::faker()->paragraphs(self::faker()->numberBetween(2,8), true),
+            'createdDate' => self::faker()->dateTimeBetween('-60 days', 'now'),
+            'docRating' => DocRatingFactory::new()->create(),
             'active' => true,
         ];
     }

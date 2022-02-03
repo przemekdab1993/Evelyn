@@ -23,7 +23,7 @@
                     </a>
                     <div class="blog-bar">
                         <div class="blog-bar">
-                            {% if doc.createdDate | date() >=  "now - 1 days" | date() %}
+                            {% if date(doc.createdDate) >  ( date("-1 month")) %}
                                 <span>Data dodania: </span>{{ doc.createdDate | ago }}
                             {% else %}
                                 <span>Data dodania: </span>{{ doc.createdDate | date("d-m-Y") }}
