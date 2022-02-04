@@ -24,10 +24,10 @@ class DocRating
     /**
      * @ORM\OneToOne(targetEntity=Doc::class, inversedBy="docRating", cascade={"persist", "remove"})
      */
-    private $docId;
+    private $doc;
 
     /**
-     * @ORM\Column(type="integer", options={"default":0})
+     * @ORM\Column(type="integer")
      */
     private $good = 0;
 
@@ -41,14 +41,14 @@ class DocRating
         return $this->id;
     }
 
-    public function getDocId(): ?Doc
+    public function getDoc(): ?Doc
     {
-        return $this->docId;
+        return $this->doc;
     }
 
-    public function setDocId(?Doc $docId): self
+    public function setDoc(?Doc $doc): self
     {
-        $this->docId = $docId;
+        $this->doc = $doc;
 
         return $this;
     }
