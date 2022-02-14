@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Doc;
 use App\Entity\DocRating;
+use App\Factory\CommentFactory;
 use App\Factory\DocFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -13,7 +14,10 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        DocFactory::new()->createMany(10);
         UserFactory::new()->createMany(5);
+
+        DocFactory::new()->createMany(10);
+        CommentFactory::new()->createMany(20);
+
     }
 }

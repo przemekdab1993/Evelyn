@@ -15,7 +15,7 @@ body {
     max-width: 1190px;
     margin-left: auto;
     margin-right: auto;
-    padding: 15px;
+    padding: 25px 25px 10px 25px;
     background-color: #6c6b6b;
 }
 .blog-doc-content .blog-title {
@@ -90,4 +90,32 @@ body {
     position: absolute;
     right: 0px;
     width: fit-content;
+}
+
+/*komentarze*/
+.blog-doc-content .blog-doc-comment {
+    background: #8a8a8a;
+    padding: 15px;
+    margin-top: 25px;
+}
+.blog-doc-content .blog-doc-comment .comment-list {
+
+}
+.blog-doc-content .blog-doc-comment .comment-list > span {
+
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item {
+    border-bottom: 2px dotted #fff;
+    margin-bottom: 10px;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item > span.comment-user {
+    font-size: 22px;
+    color: #fff;
+    font-weight: 400;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item > span.comment-date {
+    float: right;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-content {
+
 }

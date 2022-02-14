@@ -31,6 +31,21 @@
                 </div>
             </div>
 
+            <div class="blog-doc-comment">
+                <h3>Komentarze</h3>
+                <div class="comment-list">
+                    {% if doc.comments | length > 0 %}
+                        {% for comment in doc.comments %}
+                            <div class="comment-list-item">
+                                <span class="comment-user">{{ comment.username }}</span><span class="comment-date">{{ comment.createdAt | date("d-m-Y h:i")}}</span>
+                                <p class="comment-content">{{ comment.comment }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <span>Brak komentarzy do artykułu</span>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

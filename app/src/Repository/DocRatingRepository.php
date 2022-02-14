@@ -26,7 +26,7 @@ class DocRatingRepository extends ServiceEntityRepository
     public function findByDocId($docId)
     {
         return $this->createQueryBuilder('d')
-            ->andWhere('d.docId = :docId')
+            ->andWhere('d.doc = :docId')
             ->setParameter('docId', $docId)
             ->getQuery()
             ->getOneOrNullResult()
