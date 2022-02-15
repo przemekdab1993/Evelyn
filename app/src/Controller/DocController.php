@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Doc;
 use App\Entity\DocRating;
 use App\Repository\DocRepository;
@@ -64,33 +65,6 @@ class DocController extends AbstractController
         ]);
     }
 
-    #[Route('/doc/rating', name: 'docRating')]
-    public function rating(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $docId = $request->get('docId');
-        $rating = $request->get('rating');
-
-        if (!empty($docId) && !empty($rating)) {
-
-            $repository = $entityManager->getRepository(DocRating::class);
-
-            $docRating = $repository->findByDocId($docId);
-
-            if ($rating == 'good') {
-                $docRating->setGood($docRating->getGood() + 1);
-            } elseif ($rating == 'bad') {
-                $docRating->setBad($docRating->getBad() + 1);
-            }
-
-            $entityManager->persist($docRating);
-            $entityManager->flush();
-
-            return $this->redirect(sprintf('/doc/show/%s', $docId));
-
-        } else {
-            throw $this->createNotFoundException('Wybrana strona nie została odnaleziona');
-        }
-    }
 
     #[Route('/doc/{docId}/vote', name: 'docVote', methods: 'POST')]
     public function vote(Request $request, EntityManagerInterface $entityManager): Response
@@ -112,10 +86,8 @@ class DocController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('docShow', ['docId'=>$docId]);
+            return $this->json(['good'=> $docRating->getGoodString('good'), 'bad'=>$docRating->getGoodString('bad')]);
 
-        } else {
-            throw $this->createNotFoundException('Wybrana strona nie została odnaleziona');
         }
     }
 }

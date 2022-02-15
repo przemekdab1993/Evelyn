@@ -49,6 +49,7 @@ body {
     font-weight: 600;
     text-shadow: 1px 1px 4px #414141;
     background-color: #6c6b6b;
+    cursor: pointer;
 }
 .blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-good:hover,
 .blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-good:active,
@@ -57,12 +58,24 @@ body {
     color: #46ff00;
     text-decoration: none;
 }
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-good.active {
+    border-color: #46ff00;
+    color: #46ff00;
+    text-decoration: none;
+    cursor: not-allowed;
+}
 .blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad:hover,
 .blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad:active,
 .blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad:focus {
     border-color: #ff0000;
     color: #ff0000;
     text-decoration: none;
+}
+.blog-doc-content .blog-bar .blog-rating .link-rating.link-rating-bad.active {
+    border-color: #ff0000;
+    color: #ff0000;
+    text-decoration: none;
+    cursor: not-allowed;
 }
 
 

@@ -6,7 +6,7 @@ use App\Repository\DocRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Doctrine\ORM\Mapping\OrderBy;
 /**
  * @ORM\Entity(repositoryClass=DocRepository::class)
  */
@@ -55,7 +55,8 @@ class Doc
     private $docRating;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="doc")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="doc", fetch="EXTRA_LAZY")
+     * @OrderBy({"createdAt" = "DESC"})
      */
     private $comments;
 
