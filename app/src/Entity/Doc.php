@@ -172,6 +172,16 @@ class Doc
         return $this->comments;
     }
 
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getApprovedComments(): Collection
+    {
+        return $this->comments->filter(function (Comment $comment) {
+                return $comment->isApprovedComment();
+        });
+    }
+
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {

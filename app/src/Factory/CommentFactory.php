@@ -35,6 +35,12 @@ final class CommentFactory extends ModelFactory
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
     }
 
+    public function needsApproval(): self
+    {
+        return $this->addState(['status'=> Comment::STATUS_NEEDS_APPROVAL]);
+    }
+
+
     protected function getDefaults(): array
     {
         return [
@@ -44,6 +50,7 @@ final class CommentFactory extends ModelFactory
             //'createdAt' => self::faker()->dateTimeBetween('-50 days', 'now'),
             //'updatedAt' => self::faker()->dateTimeBetween('-50 days', 'now'),
             'doc' => DocFactory::random(),
+            'status' => Comment::STATUS_APPROVED
         ];
     }
 
