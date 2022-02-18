@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
+use App\Repository\CommentRepository;
 use App\Repository\DocRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OrderBy;
 /**
@@ -177,9 +179,15 @@ class Doc
      */
     public function getApprovedComments(): Collection
     {
-        return $this->comments->filter(function (Comment $comment) {
-                return $comment->isApprovedComment();
-        });
+
+        $criteria = Criteria::create()
+            ->andWhere(Criteria::expr()->eq('status',Comment::STATUS_APPROVED));
+
+        return $this->comments->matching(CommentRepository::createApprovedCriteria());
+
+//        return $this->comments->filter(function (Comment $comment) {
+//                return $comment->isApprovedComment();
+//        });
     }
 
     public function addComment(Comment $comment): self

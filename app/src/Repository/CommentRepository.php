@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,21 @@ class CommentRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
+    }
+
+    public static function createApprovedCriteria():Criteria
+    {
+        return Criteria::create()
+            ->andWhere(Criteria::expr()->eq('status',Comment::STATUS_APPROVED));
+    }
+
+    public function findAllApprovedComments($max = 10):array
+    {
+        return $this->createQueryBuilder('c')
+            ->addCriteria(self::createApprovedCriteria())
+            ->getMaxResults($max)
+            ->getQuery()
+            ->getResults();
     }
 
     // /**
