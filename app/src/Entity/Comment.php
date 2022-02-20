@@ -85,6 +85,15 @@ class Comment
         return $this->doc;
     }
 
+    public function getDocTitleText(): string
+    {
+        if (!$this->getDoc()) {
+            return '';
+        }
+
+        return (string) $this->getDoc()->getTitle();
+    }
+
     public function setDoc(?Doc $doc): self
     {
         $this->doc = $doc;

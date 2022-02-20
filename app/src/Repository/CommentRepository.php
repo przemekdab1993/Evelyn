@@ -40,9 +40,13 @@ class CommentRepository extends ServiceEntityRepository
      */
     public function findMostPopularListComment($max = 10):array
     {
-        return $this->createQueryBuilder('c')
+        return $this->createQueryBuilder('comment')
             ->addCriteria(self::createApprovedCriteria())
-            ->orderBy('c.vote', 'DESC')
+            ->orderBy('comment.vote', 'DESC')
+            ->innerJoin('comment.doc', 'doc')
+            ->addSelect('doc')
+            ->innerJoin('doc.docRating', 'rating')
+            ->addSelect('rating')
             ->setMaxResults($max)
             ->getQuery()
             ->getResult();
