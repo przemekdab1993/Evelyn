@@ -1,5 +1,5 @@
 $(function() {
-    var $containerVote = $('.blog-rating');
+    var $containerVote = $('.comment-vote');
 
     $containerVote.find('a').on('click', function(e) {
 
@@ -14,12 +14,11 @@ $(function() {
         var $link = $(e.currentTarget);
 
         $.ajax({
-            url: '/doc/'+$link.data('doc-id')+'/vote',
+            url: '/doc/'+$link.data('comment-id')+'/voteComment',
             method: 'POST',
-            data: {'ratingType' : $link.data('direction')}
+            data: {'voteType' : $link.data('direction')}
         }).then(function(data) {
-            $containerVote.find('span.rating-good').text(data.good);
-            $containerVote.find('span.rating-bad').text(data.bad);
+            $containerVote.find('span.comment-vote-count#comment-vote-'+$link.data('comment-id')).text(data.countVote);
 
             e.currentTarget.disabled = false;
             $(e.currentTarget).removeClass('active');

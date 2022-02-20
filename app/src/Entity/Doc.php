@@ -180,9 +180,6 @@ class Doc
     public function getApprovedComments(): Collection
     {
 
-        $criteria = Criteria::create()
-            ->andWhere(Criteria::expr()->eq('status',Comment::STATUS_APPROVED));
-
         return $this->comments->matching(CommentRepository::createApprovedCriteria());
 
 //        return $this->comments->filter(function (Comment $comment) {

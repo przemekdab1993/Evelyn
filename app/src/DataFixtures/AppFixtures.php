@@ -16,9 +16,9 @@ class AppFixtures extends Fixture
     {
         UserFactory::new()->createMany(5);
 
-        DocFactory::new()->createMany(10);
+        DocFactory::new()->createMany(15);
 
-        CommentFactory::new()->createMany(20);
+        CommentFactory::new()->createMany(30);
         CommentFactory::new()->needsApproval()->many(10)->create();
 
     }

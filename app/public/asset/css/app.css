@@ -120,15 +120,50 @@ body {
 .blog-doc-content .blog-doc-comment .comment-list .comment-list-item {
     border-bottom: 2px dotted #fff;
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
 }
-.blog-doc-content .blog-doc-comment .comment-list .comment-list-item > span.comment-user {
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote {
+    min-width: 180px;
+    max-width: 180px;
+    padding: 0px 10px 20px;
+    text-align: center;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote {
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 6px 12px;
+    line-height: 26px;
+    display: inline-block;
+    margin: 5px auto;
+    text-align: center;
+    cursor: pointer;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote:hover,
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote:active,
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote:focus {
+    text-decoration: none;
+    border-color: #46ff00;
+    color: #46ff00;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-vote a.link-vote.active {
+    text-decoration: none;
+    border-color: #46ff00;
+    color: #46ff00;
+    cursor: not-allowed;
+}
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item span.comment-user {
     font-size: 22px;
     color: #fff;
     font-weight: 400;
 }
-.blog-doc-content .blog-doc-comment .comment-list .comment-list-item > span.comment-date {
+.blog-doc-content .blog-doc-comment .comment-list .comment-list-item span.comment-date {
     float: right;
 }
 .blog-doc-content .blog-doc-comment .comment-list .comment-list-item .comment-content {
 
+}
+.number-of-popular {
+    font-size: 32px;
+    display: block;
 }

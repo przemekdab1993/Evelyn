@@ -18,27 +18,17 @@
             <div class="blog-content">
                 <p>{{ doc.content }}</p>
             </div>
-            <div class="blog-bar">
-                <div class="blog-bar-date">
-                    <span>Data dodania: </span>{{ doc.createdDate | date("d-m-Y") }}
-                </div>
-                <div class="blog-rating">
-                    <h4>Oceń artykuł <span class="rating-good">{{ doc.docRating.goodString('good') }}</span> / <span class="rating-bad">{{ doc.docRating.goodString('bad') }} </span></h4>
 
-                    <a class="link-rating link-rating-good" data-doc-id="{{ doc.id }}" data-direction="good"><span>Podoba mi się</span></a>
-                    <a class="link-rating link-rating-bad" data-doc-id="{{ doc.id }}" data-direction="bad"><span>Nie podoba mi się</span></a>
-                </div>
-            </div>
+            {# panel do oddawania głosów na artykuł #}
+            {{  include('doc/view/_ratingDoc.html.twig',[]) }}
 
             <div class="blog-doc-comment">
                 <h3>Komentarze</h3>
                 <div class="comment-list">
                     {% if doc.approvedComments | length > 0 %}
                         {% for comment in doc.approvedComments %}
-                            <div class="comment-list-item">
-                                <span class="comment-user">{{ comment.username }}</span><span class="comment-date">{{ comment.createdAt | date("d-m-Y h:i")}}</span>
-                                <p class="comment-content">{{ comment.comment }}</p>
-                            </div>
+                            {# widok pojedynczego komentarza #}
+                            {{  include('doc/view/_comment.html.twig',[]) }}
                         {% endfor %}
                     {% else %}
                         <span>Brak komentarzy do artykułu</span>
@@ -51,4 +41,5 @@
 
 {% block javascripts_end %}
     <script src={{ asset('asset/js/voteDoc.js') }}></script>
+    <script src={{ asset('asset/js/voteComment.js') }}></script>
 {% endblock %}

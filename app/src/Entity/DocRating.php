@@ -58,18 +58,6 @@ class DocRating
         return $this->good;
     }
 
-    public function getGoodString($typeRating): string
-    {
-        if ($typeRating == 'good') {
-            $prefix = '+';
-            return sprintf('%s%d',$prefix, abs($this->getGood()));
-
-        } else if ($typeRating == 'bad') {
-            $prefix = '-';
-            return sprintf('%s%d',$prefix, abs($this->getBad()));
-        }
-    }
-
     public function setGood(int $good): self
     {
         $this->good = $good;
@@ -87,6 +75,23 @@ class DocRating
         $this->bad = $bad;
 
         return $this;
+    }
+
+    public function getGoodString($typeRating): string
+    {
+        if ($typeRating == 'good') {
+            $prefix = '+';
+            return sprintf('%s%d',$prefix, abs($this->getGood()));
+
+        } else if ($typeRating == 'bad') {
+            $prefix = '-';
+            return sprintf('%s%d',$prefix, abs($this->getBad()));
+        }
+    }
+
+    public function getTotalCountRaring(): int
+    {
+        return $this->good + $this->bad;
     }
 
     public function upVoteGood() {

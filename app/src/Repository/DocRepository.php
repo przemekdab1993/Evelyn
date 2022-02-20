@@ -22,7 +22,6 @@ class DocRepository extends ServiceEntityRepository
     /**
     * @return Doc[] Returns an array of Doc objects
     */
-
     public function findListDoc()
     {
         return $this->createQueryBuilder('d')

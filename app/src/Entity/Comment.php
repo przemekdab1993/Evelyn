@@ -46,6 +46,11 @@ class Comment
      */
     private $status = self::STATUS_NEEDS_APPROVAL;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $vote = 0;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,5 +110,23 @@ class Comment
     public function isApprovedComment(): bool
     {
         return $this->status === self::STATUS_APPROVED;
+    }
+
+    public function getVote(): ?int
+    {
+        return $this->vote;
+    }
+
+    public function setVote(int $vote): self
+    {
+        $this->vote = $vote;
+
+        return $this;
+    }
+    public function upVote(): self
+    {
+        $this->vote++;
+
+        return $this;
     }
 }

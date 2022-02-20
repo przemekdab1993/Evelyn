@@ -30,9 +30,22 @@ class CommentRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('c')
             ->addCriteria(self::createApprovedCriteria())
-            ->getMaxResults($max)
+            ->setMaxResults($max)
             ->getQuery()
-            ->getResults();
+            ->getResult();
+    }
+
+    /**
+     * @return array
+     */
+    public function findMostPopularListComment($max = 10):array
+    {
+        return $this->createQueryBuilder('c')
+            ->addCriteria(self::createApprovedCriteria())
+            ->orderBy('c.vote', 'DESC')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
     }
 
     // /**

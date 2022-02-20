@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Doc;
 use App\Entity\DocRating;
+use App\Repository\CommentRepository;
 use App\Repository\DocRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +20,6 @@ class DocController extends AbstractController
     {
 
         $docList = $docRepository->findListDoc();
-
 
         return $this->render('doc/index.html.twig', [
             'docList' => $docList,
@@ -67,7 +67,7 @@ class DocController extends AbstractController
 
 
     #[Route('/doc/{docId}/vote', name: 'docVote', methods: 'POST')]
-    public function vote(Request $request, EntityManagerInterface $entityManager): Response
+    public function voteDoc(Request $request, EntityManagerInterface $entityManager): Response
     {
         $ratingType = $request->request->get('ratingType');
         $docId = $request->get('docId');
@@ -89,5 +89,38 @@ class DocController extends AbstractController
             return $this->json(['good'=> $docRating->getGoodString('good'), 'bad'=>$docRating->getGoodString('bad')]);
 
         }
+    }
+
+    #[Route('doc/{commentId}/voteComment', name: 'commentVote', methods: 'POST')]
+    public function voteComment(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $voteType = $request->request->get('voteType');
+        $commentId = $request->get('commentId');
+
+        if (!empty($voteType) && !empty($commentId)) {
+            $repository = $entityManager->getRepository(Comment::class);
+
+            $comment = $repository->find(['id'=>$commentId]);
+
+            if ($voteType == 'up') {
+                $comment->upVote();
+            }
+            $entityManager->flush();
+
+            return $this->json(['countVote' => $comment->getVote()]);
+        }
+    }
+
+    #[Route('/doc/popularCommentList', name: 'popularCommentList')]
+    public function popularCommentList(CommentRepository $commentRepository): Response
+    {
+
+        $docList = $commentRepository->findMostPopularListComment(10);
+
+
+        return $this->render('doc/popularCommentList.html.twig', [
+            'commentList' => $docList,
+            'countComment' => '10'
+        ]);
     }
 }
