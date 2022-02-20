@@ -4,8 +4,12 @@
 
 {% block body %}
 
-    <div class="box-content">
+    <div class="box-content d-flex justify-content-between">
         <h1>Lista najpopularniejszych {{ countComment }} komentarzy do dokumentów</h1>
+        <form action="{{ path('popularCommentList') }}" >
+            <input type="search" name="q" class="form-control" value="{{ app.request.query.get('q') }}" placeholder="Search..." aria-label="Search">
+        </form>
+
     </div>
 
     <div class="box-content-2">

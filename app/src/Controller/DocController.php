@@ -112,11 +112,9 @@ class DocController extends AbstractController
     }
 
     #[Route('/doc/popularCommentList', name: 'popularCommentList')]
-    public function popularCommentList(CommentRepository $commentRepository): Response
+    public function popularCommentList(Request $request, CommentRepository $commentRepository): Response
     {
-
-        $docList = $commentRepository->findMostPopularListComment(10);
-
+        $docList = $commentRepository->findMostPopularListComment($request->query->get('q'));
 
         return $this->render('doc/popularCommentList.html.twig', [
             'commentList' => $docList,
