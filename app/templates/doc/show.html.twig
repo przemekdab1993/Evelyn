@@ -24,16 +24,16 @@
 
             <div class="blog-doc-comment">
                 <h3>Komentarze</h3>
-                <div class="comment-list">
+                <ul class="comment-list">
                     {% if doc.approvedComments | length > 0 %}
                         {% for comment in doc.approvedComments %}
                             {# widok pojedynczego komentarza #}
                             {{  include('doc/view/_comment.html.twig',[]) }}
                         {% endfor %}
                     {% else %}
-                        <span>Brak komentarzy do artykułu</span>
+                        <li class="comment-list-item"><span>Brak komentarzy do artykułu</span></li>
                     {% endif %}
-                </div>
+                </ul>
             </div>
         </div>
     </div>

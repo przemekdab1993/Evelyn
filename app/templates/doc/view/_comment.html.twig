@@ -1,20 +1,20 @@
-<div class="comment-list-item">
+<li class="comment-list-item">
     {% if commentTop | default(false) %}
-        <div>{{ loop.index }}.</div>
-        {{ comment.doc.title }}
+        <div class="top-10-place">{{ loop.index }}.</div>
+        <a class="top-10-comment-link-doc" href="{{ path('docShow', { docId: comment.getDoc().id}) }}">{{ comment.doc.title }}</a>
     {% endif %}
-    <div>
+    <div class="comment-box">
         <span class="comment-user">{{ comment.username }}</span><span class="comment-date">{{ comment.createdAt | date("d-m-Y h:i")}}</span>
         <p class="comment-content">{{ comment.comment }}</p>
     </div>
     {% if commentTop | default(false) %}
-        <div class="comment-vote">
-            Liczba głosów": <span class="comment-vote-count">{{ comment.vote }}</span>
-        </div>
+{#        <div class="comment-vote">#}
+{#            Liczba głosów: <span class="comment-vote-count">{{ comment.vote }}</span>#}
+{#        </div>#}
     {% else %}
         <div class="comment-vote">
-            Liczba głosów": <span class="comment-vote-count" id="comment-vote-{{ comment.id }}">{{ comment.vote }}</span>
+            Liczba głosów: <span class="comment-vote-count" id="comment-vote-{{ comment.id }}">{{ comment.vote }}</span>
             <a class="link-vote link-vote-up" data-comment-id="{{ comment.id }}" data-direction="up"><span>Podoba mi się</span></a>
         </div>
     {% endif %}
-</div>
+</li>
