@@ -45,6 +45,7 @@ final class DocFactory extends ModelFactory
             'content' => self::faker()->paragraphs(self::faker()->numberBetween(2,8), true),
             'createdDate' => self::faker()->dateTimeBetween('-60 days', 'now'),
             'docRating' => DocRatingFactory::new()->create(),
+            'tags' => TagFactory::randomRange(1, 3),
             'active' => true,
         ];
     }
