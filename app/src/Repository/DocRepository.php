@@ -28,6 +28,8 @@ class DocRepository extends ServiceEntityRepository
             ->andWhere('d.active = :active')
             ->setParameter('active', true)
             ->orderBy('d.createdDate', 'DESC')
+            ->leftJoin('d.tags', 'tag')
+            ->addSelect('tag')
             ->setMaxResults(100)
             ->getQuery()
             ->getResult()

@@ -18,9 +18,22 @@
             <div class="blog-content">
                 <p>{{ doc.content }}</p>
             </div>
+            <div class="blog-bar">
+                <div class="blog-bar-date">
+                    Data dodania: <span>{{ doc.createdDate | date("d-m-Y") }}</span>
+                </div>
+                {% if (doc.tags | length) > 0 %}
+                    <div class="blog-bar-tag">
+                        Tags:
+                        {% for tag in doc.tags %}
+                            <span>#{{ tag.name }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {# panel do oddawania głosów na artykuł #}
+                {{  include('doc/view/_ratingDoc.html.twig',[]) }}
+            </div>
 
-            {# panel do oddawania głosów na artykuł #}
-            {{  include('doc/view/_ratingDoc.html.twig',[]) }}
 
             <div class="blog-doc-comment">
                 <h3>Komentarze</h3>

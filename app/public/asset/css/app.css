@@ -25,11 +25,37 @@ body {
 
 }
 .blog-doc-content .blog-bar {
-
+    margin-top: 25px;
 }
 .blog-doc-content .blog-bar .blog-bar-date {
     display: inline-block;
+    margin-right: 25px;
 }
+.blog-doc-content .blog-bar .blog-bar-tags {
+    display: inline-block;
+}
+
+.blog-list .blog-bar {
+    margin-top: 25px;
+}
+.blog-list .blog-bar .blog-date {
+    display: inline-block;
+}
+.blog-list .blog-bar .blog-date span {
+    color: #fff;
+    font-weight: 600;
+}
+.blog-list .blog-bar .blog-tags {
+    display: inline-block;
+}
+.blog-list .blog-bar .blog-tags span {
+    color: #fff;
+    padding: 6px 12px;
+    background-color: #8a8a8a;
+    border-radius: 20px;
+    margin-right: 4px;
+}
+
 .blog-doc-content .blog-bar .blog-rating {
     border: 1px solid #ffe500;
     padding: 12px;

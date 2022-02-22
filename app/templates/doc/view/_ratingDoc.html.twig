@@ -1,11 +1,6 @@
-<div class="blog-bar">
-    <div class="blog-bar-date">
-        <span>Data dodania: </span>{{ doc.createdDate | date("d-m-Y") }}
-    </div>
-    <div class="blog-rating">
-        <h4>Oceń artykuł <span class="rating-good">{{ doc.docRating.goodString('good') }}</span> / <span class="rating-bad">{{ doc.docRating.goodString('bad') }} </span></h4>
+<div class="blog-rating">
+    <h4>Oceń artykuł <span class="rating-good">{{ doc.docRating.goodString('good') }}</span> / <span class="rating-bad">{{ doc.docRating.goodString('bad') }} </span></h4>
 
-        <a class="link-rating link-rating-good" data-doc-id="{{ doc.id }}" data-direction="good"><span>Podoba mi się</span></a>
-        <a class="link-rating link-rating-bad" data-doc-id="{{ doc.id }}" data-direction="bad"><span>Nie podoba mi się</span></a>
-    </div>
+    <a class="link-rating link-rating-good" data-doc-id="{{ doc.id }}" data-direction="good"><span>Podoba mi się</span></a>
+    <a class="link-rating link-rating-bad" data-doc-id="{{ doc.id }}" data-direction="bad"><span>Nie podoba mi się</span></a>
 </div>
