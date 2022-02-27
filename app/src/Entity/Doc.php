@@ -67,10 +67,16 @@ class Doc
      */
     private $tags;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DocAuthor::class, mappedBy="Doc")
+     */
+    private $yes;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->yes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -235,6 +241,36 @@ class Doc
     public function removeTag(Tag $tag): self
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DocAuthor[]
+     */
+    public function getYes(): Collection
+    {
+        return $this->yes;
+    }
+
+    public function addYe(DocAuthor $ye): self
+    {
+        if (!$this->yes->contains($ye)) {
+            $this->yes[] = $ye;
+            $ye->setDoc($this);
+        }
+
+        return $this;
+    }
+
+    public function removeYe(DocAuthor $ye): self
+    {
+        if ($this->yes->removeElement($ye)) {
+            // set the owning side to null (unless already changed)
+            if ($ye->getDoc() === $this) {
+                $ye->setDoc(null);
+            }
+        }
 
         return $this;
     }

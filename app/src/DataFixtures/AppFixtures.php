@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Doc;
 use App\Entity\DocRating;
+use App\Factory\AuthorFactory;
 use App\Factory\CommentFactory;
 use App\Factory\DocFactory;
 use App\Factory\TagFactory;
@@ -17,6 +18,7 @@ class AppFixtures extends Fixture
     {
         UserFactory::new()->createMany(5);
         TagFactory::new()->createMany(60);
+        AuthorFactory::new()->createMany(5);
 
         DocFactory::new()->createMany(20);
 
