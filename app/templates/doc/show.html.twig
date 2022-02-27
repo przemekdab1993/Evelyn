@@ -23,7 +23,7 @@
                     Data dodania: <span>{{ doc.createdDate | date("d-m-Y") }}</span>
                 </div>
                 {% if (doc.tags | length) > 0 %}
-                    <div class="blog-bar-tag">
+                    <div class="blog-bar-tags">
                         Tags:
                         {% for tag in doc.tags %}
                             <span>#{{ tag.name }}</span>

@@ -28,11 +28,20 @@ body {
     margin-top: 25px;
 }
 .blog-doc-content .blog-bar .blog-bar-date {
-    display: inline-block;
-    margin-right: 25px;
+    display: block;
+    margin-bottom: 20px;
+
 }
 .blog-doc-content .blog-bar .blog-bar-tags {
-    display: inline-block;
+    display: block;
+    margin-bottom: 20px;
+}
+.blog-doc-content .blog-bar .blog-bar-tags span {
+    color: #fff;
+    padding: 6px 12px;
+    background-color: #8a8a8a;
+    border-radius: 20px;
+    margin-right: 4px;
 }
 
 .blog-list .blog-bar {
@@ -40,6 +49,7 @@ body {
 }
 .blog-list .blog-bar .blog-date {
     display: inline-block;
+    margin-right: 25px;
 }
 .blog-list .blog-bar .blog-date span {
     color: #fff;
