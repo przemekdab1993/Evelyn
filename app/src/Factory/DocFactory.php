@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Doc;
+use App\Entity\DocAuthor2;
 use App\Entity\DocRating;
 use App\Repository\DocRepository;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -54,7 +55,9 @@ final class DocFactory extends ModelFactory
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            // ->afterInstantiate(function(Doc $doc): void {})
+//             ->afterInstantiate(function(Doc $doc, DocAuthor2 $docAuthor): void {
+//                  $doc->addAuthor(DocAuthorFactory::create());
+//             })
         ;
     }
 

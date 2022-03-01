@@ -18,14 +18,14 @@ class DocAuthor
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Doc::class, inversedBy="yes")
+     * @ORM\ManyToOne(targetEntity=Doc::class, inversedBy="docAuthors")
      */
-    private $Doc;
+    private $doc;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Tag::class)
+     * @ORM\ManyToOne(targetEntity=Author::class)
      */
-    private $Tag;
+    private $author;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -44,24 +44,24 @@ class DocAuthor
 
     public function getDoc(): ?Doc
     {
-        return $this->Doc;
+        return $this->doc;
     }
 
-    public function setDoc(?Doc $Doc): self
+    public function setDoc(?Doc $doc): self
     {
-        $this->Doc = $Doc;
+        $this->doc = $doc;
 
         return $this;
     }
 
-    public function getTag(): ?Tag
+    public function getAuthor(): ?Author
     {
-        return $this->Tag;
+        return $this->author;
     }
 
-    public function setTag(?Tag $Tag): self
+    public function setAuthor(?Author $author): self
     {
-        $this->Tag = $Tag;
+        $this->author = $author;
 
         return $this;
     }

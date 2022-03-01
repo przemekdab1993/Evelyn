@@ -68,15 +68,16 @@ class Doc
     private $tags;
 
     /**
-     * @ORM\OneToMany(targetEntity=DocAuthor::class, mappedBy="Doc")
+     * @ORM\OneToMany(targetEntity=DocAuthor::class, mappedBy="doc")
      */
-    private $yes;
+    private $docAuthors;
+
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->tags = new ArrayCollection();
-        $this->yes = new ArrayCollection();
+        $this->docAuthors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -248,27 +249,27 @@ class Doc
     /**
      * @return Collection|DocAuthor[]
      */
-    public function getYes(): Collection
+    public function getDocAuthors(): Collection
     {
-        return $this->yes;
+        return $this->docAuthors;
     }
 
-    public function addYe(DocAuthor $ye): self
+    public function addDocAuthor(DocAuthor $docAuthor): self
     {
-        if (!$this->yes->contains($ye)) {
-            $this->yes[] = $ye;
-            $ye->setDoc($this);
+        if (!$this->docAuthors->contains($docAuthor)) {
+            $this->docAuthors[] = $docAuthor;
+            $docAuthor->setDoc($this);
         }
 
         return $this;
     }
 
-    public function removeYe(DocAuthor $ye): self
+    public function removeDocAuthor(DocAuthor $docAuthor): self
     {
-        if ($this->yes->removeElement($ye)) {
+        if ($this->docAuthors->removeElement($docAuthor)) {
             // set the owning side to null (unless already changed)
-            if ($ye->getDoc() === $this) {
-                $ye->setDoc(null);
+            if ($docAuthor->getDoc() === $this) {
+                $docAuthor->setDoc(null);
             }
         }
 
