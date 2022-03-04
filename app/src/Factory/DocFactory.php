@@ -3,7 +3,6 @@
 namespace App\Factory;
 
 use App\Entity\Doc;
-use App\Entity\DocAuthor2;
 use App\Entity\DocRating;
 use App\Repository\DocRepository;
 use Zenstruck\Foundry\RepositoryProxy;

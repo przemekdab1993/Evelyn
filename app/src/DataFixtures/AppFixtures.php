@@ -9,7 +9,6 @@ use App\Factory\CommentFactory;
 use App\Factory\DocAuthorFactory;
 use App\Factory\DocFactory;
 use App\Factory\TagFactory;
-use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
