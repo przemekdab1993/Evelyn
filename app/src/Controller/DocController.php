@@ -17,8 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DocController extends AbstractController
 {
-    #[Route('/doc/list', name: 'docList')]
-    public function index(DocRepository $docRepository): Response
+    #[Route('/doc/list/{page<\d+>}', name: 'docList')]
+    public function index(DocRepository $docRepository, int $page = 1): Response
     {
 
         $queryBuilder = $docRepository->createListDocQueryBuilder();
@@ -26,7 +26,8 @@ class DocController extends AbstractController
         $pagerfantaListDoc = new Pagerfanta(
             new QueryAdapter($queryBuilder)
         );
-        $pagerfantaListDoc->setMaxPerPage(6);
+        $pagerfantaListDoc->setMaxPerPage(10);
+        $pagerfantaListDoc->setCurrentPage($page);
 
         return $this->render('doc/index.html.twig', [
             'pagerDocList' => $pagerfantaListDoc,
