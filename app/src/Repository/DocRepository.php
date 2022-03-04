@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Doc;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -19,10 +20,7 @@ class DocRepository extends ServiceEntityRepository
         parent::__construct($registry, Doc::class);
     }
 
-    /**
-    * @return Doc[] Returns an array of Doc objects
-    */
-    public function findListDoc()
+    public function createListDocQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('d')
             ->andWhere('d.active = :active')
@@ -30,9 +28,10 @@ class DocRepository extends ServiceEntityRepository
             ->orderBy('d.createdDate', 'DESC')
             ->leftJoin('d.tags', 'tag')
             ->addSelect('tag')
-            ->setMaxResults(100)
-            ->getQuery()
-            ->getResult()
+            ->leftJoin('d.docAuthors', 'docAuthors')
+            ->addSelect('docAuthors')
+            ->innerJoin('docAuthors.author', 'author')
+            ->addSelect('author')
         ;
     }
 

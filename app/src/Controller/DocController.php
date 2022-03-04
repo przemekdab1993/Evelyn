@@ -8,6 +8,8 @@ use App\Entity\DocRating;
 use App\Repository\CommentRepository;
 use App\Repository\DocRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,10 +21,15 @@ class DocController extends AbstractController
     public function index(DocRepository $docRepository): Response
     {
 
-        $docList = $docRepository->findListDoc();
+        $queryBuilder = $docRepository->createListDocQueryBuilder();
+
+        $pagerfantaListDoc = new Pagerfanta(
+            new QueryAdapter($queryBuilder)
+        );
+        $pagerfantaListDoc->setMaxPerPage(6);
 
         return $this->render('doc/index.html.twig', [
-            'docList' => $docList,
+            'pagerDocList' => $pagerfantaListDoc,
         ]);
     }
 
