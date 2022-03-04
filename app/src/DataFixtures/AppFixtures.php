@@ -9,6 +9,7 @@ use App\Factory\CommentFactory;
 use App\Factory\DocAuthorFactory;
 use App\Factory\DocFactory;
 use App\Factory\TagFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -16,7 +17,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        //UserFactory::createMany(5);
+        UserFactory::createMany(5);
         TagFactory::createMany(60);
         AuthorFactory::createMany(5);
 
