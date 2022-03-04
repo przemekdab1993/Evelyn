@@ -17,7 +17,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        UserFactory::createMany(5);
+        //UserFactory::createMany(5);
         TagFactory::createMany(60);
         AuthorFactory::createMany(5);
 
