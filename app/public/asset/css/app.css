@@ -43,6 +43,18 @@ body {
     border-radius: 20px;
     margin-right: 4px;
 }
+.blog-doc-content .blog-bar .blog-bar-author {
+    display: block;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #8a8a8a;
+    border-radius: 8px;
+}
+.blog-doc-content .blog-bar .blog-bar-author span {
+    font-size: 20px;
+    color: #fff;
+}
+
 
 .blog-list .blog-bar {
     margin-top: 25px;
@@ -52,6 +64,14 @@ body {
     margin-right: 25px;
 }
 .blog-list .blog-bar .blog-date span {
+    color: #fff;
+    font-weight: 600;
+}
+.blog-list .blog-bar .blog-author {
+    display: inline-block;
+    margin-right: 25px;
+}
+.blog-list .blog-bar .blog-author span {
     color: #fff;
     font-weight: 600;
 }

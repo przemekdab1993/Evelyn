@@ -21,6 +21,14 @@
                     <span>{{ doc.createdDate | date("d-m-Y") }}</span>
                 </div>
             {% endif %}
+            {% if (doc.docAuthors | length) > 0 %}
+                <div class="blog-author">
+                    Autor:
+                    {% for docAuthor in doc.docAuthors %}
+                        <span>{{ docAuthor.author.name }} {{ docAuthor.author.surName }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
             {% if (doc.tags | length) > 0 %}
                 <div class="blog-tags">
                     Tags:
@@ -29,6 +37,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
+
         </div>
     </div>
 </li>
