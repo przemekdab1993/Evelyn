@@ -16,6 +16,14 @@ class User implements UserInterface
 {
     use TimestampableEntity;
 
+    public const USER_STATUS = [
+        'UNCONFIRMED' => 'unconfirmed',
+        'ACTIVE' => 'active',
+        'INACTIVE' => 'inactive',
+        'BAN' => 'ban'
+    ];
+
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -42,6 +50,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status = self::USER_STATUS['UNCONFIRMED'];
 
     public function getId(): ?int
     {
@@ -148,5 +161,24 @@ class User implements UserInterface
         $this->lastName = $lastName;
 
         return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        if (!in_array($status,self::USER_STATUS)) {
+            throw new \InvalidArgumentException(sprintf('Invalidy status "%s"', $status));
+        }
+        $this->status = $status;
+
+        return $this;
+    }
+    public function isActiveUser(): bool
+    {
+        return $this->status === self::USER_STATUS['ACTIVE'];
     }
 }
