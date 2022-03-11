@@ -16,12 +16,12 @@
                    <form method="post" class="row">
 
                        {% if error %}
-                       <div class="alert alert-denger">{{ error.messageKey }}</div>
+                       <div class="alert alert-danger">{{ error.messageKey | trans(error.messageData, 'security') }}</div>
                        {% endif %}
 
                        <div class="col-12 mb-2">
                            <label for="inputEmail">Email</label>
-                           <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
+                           <input type="email" name="email" id="inputEmail" value="{{ app.request.request.get('email') }}" class="form-control" required autofocus>
                        </div>
                        <div class="col-12 mb-2">
                            <label for="inputPassword">Password</label>
