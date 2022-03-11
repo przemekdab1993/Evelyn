@@ -14,6 +14,11 @@
                <div class="login-form mt-4 p-4">
 
                    <form method="post" class="row">
+
+                       {% if error %}
+                       <div class="alert alert-denger">{{ error.messageKey }}</div>
+                       {% endif %}
+
                        <div class="col-12 mb-2">
                            <label for="inputEmail">Email</label>
                            <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
