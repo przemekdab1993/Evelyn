@@ -28,8 +28,14 @@ security:
                 login_path: login
                 check_path: login
 
+                enable_csrf: true
+
                 username_parameter: email
                 password_parameter: password
+                csrf_parameter: _csrf_token
+                csrf_token_id: authenticate
+
+
 
             logout:
                 target: /login
