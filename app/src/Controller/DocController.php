@@ -14,7 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
+
+/**
+ * @IsGranted("ROLE_ADMIN")
+ */
 class DocController extends AbstractController
 {
     #[Route('/doc/list/{page<\d+>}', name: 'docList')]
@@ -34,9 +39,20 @@ class DocController extends AbstractController
         ]);
     }
 
-    #[Route('/doc/new', name: 'docNew')]
+
+
+    #[Route('doc/new', name: 'newDoc')]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(EntityManagerInterface $entityManager): Response
     {
+//        drugi sposób przerywa działanie
+//        $this->denyAccessUnlessGranted('ROLE_USER');
+
+//        trzeci sposób daje wyjątek
+//        if (!$this->isGranted('ROLE_ADMIN')) {
+//            throw $this->createAccessDeniedException('No access fo your role!');
+//        }
+
 //        $newDoc = new Doc();
 //        $newDocRating = new DocRating();
 //
