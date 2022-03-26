@@ -17,9 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
-/**
- * @IsGranted("ROLE_ADMIN")
- */
+
 class DocController extends AbstractController
 {
     #[Route('/doc/list/{page<\d+>}', name: 'docList')]
@@ -42,7 +40,7 @@ class DocController extends AbstractController
 
 
     #[Route('doc/new', name: 'newDoc')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
     public function new(EntityManagerInterface $entityManager): Response
     {
 //        drugi sposób przerywa działanie
