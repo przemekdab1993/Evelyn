@@ -16,4 +16,10 @@ class AdminController extends AbstractController
             'controller_name' => 'AdminController',
         ]);
     }
+
+    #[Route('/admin/login', name: 'adminLogin')]
+    public function login(): Response
+    {
+        return new Response('Page admin login should be public');
+    }
 }
