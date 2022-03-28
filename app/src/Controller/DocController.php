@@ -10,15 +10,16 @@ use App\Repository\DocRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
+use Psr\Log\LoggerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 
-class DocController extends AbstractController
+class DocController extends BaseController
 {
     #[Route('/doc/list/{page<\d+>}', name: 'docList')]
     public function index(DocRepository $docRepository, int $page = 1): Response
@@ -114,7 +115,8 @@ class DocController extends AbstractController
     }
 
     #[Route('doc/{commentId}/voteComment', name: 'commentVote', methods: 'POST')]
-    public function voteComment(Request $request, EntityManagerInterface $entityManager): Response
+    #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+    public function voteComment(Request $request, EntityManagerInterface $entityManager, LoggerInterface $logger): Response
     {
         $voteType = $request->request->get('voteType');
         $commentId = $request->get('commentId');
@@ -128,6 +130,11 @@ class DocController extends AbstractController
                 $comment->upVote();
             }
             $entityManager->flush();
+
+            $logger->info('{user} is voting on comment {comment}', [
+                'user' => $this->getUser()->getEmail(),
+                'comment' => $comment->getId()
+            ]);
 
             return $this->json(['countVote' => $comment->getVote()]);
         }
@@ -143,4 +150,5 @@ class DocController extends AbstractController
             'countComment' => '10'
         ]);
     }
+
 }

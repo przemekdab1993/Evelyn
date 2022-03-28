@@ -13,8 +13,15 @@
 {#        </div>#}
     {% else %}
         <div class="comment-vote">
-            Liczba głosów: <span class="comment-vote-count" id="comment-vote-{{ comment.id }}">{{ comment.vote }}</span>
-            <a class="link-vote link-vote-up" data-comment-id="{{ comment.id }}" data-direction="up"><span>Podoba mi się</span></a>
+            Liczba głosów:
+            <span class="comment-vote-count" id="comment-vote-{{ comment.id }}">
+                {{ comment.vote }}
+            </span>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a class="link-vote link-vote-up" data-comment-id="{{ comment.id }}" data-direction="up">
+                <span>Podoba mi się</span>
+            </a>
+            {% endif %}
         </div>
     {% endif %}
 </li>
