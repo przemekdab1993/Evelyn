@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN, ROLE_SUPER_ADMIN')]
     public function index(): Response
     {
         return $this->render('admin/index.html.twig', [

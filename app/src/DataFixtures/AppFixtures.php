@@ -22,11 +22,17 @@ class AppFixtures extends Fixture
             'email' => 'przemekdab1993@gmail.com',
             'plainPassword' => 'duda',
             'status' => 'active',
-            'roles' => ['ROLE_ADMIN']
+            'roles' => ['ROLE_SUPER_ADMIN']
         ]);
         UserFactory::createOne([
             'email' => 'ewelinak1996@gmail.com',
-            'plainPassword' => 'duda',
+            'plainPassword' => 'kula',
+            'status' => 'active',
+            'roles' => ['ROLE_ADMIN']
+        ]);
+        UserFactory::createOne([
+            'email' => 'andrzejduda@gmail.com',
+            'plainPassword' => 'dupa',
             'status' => 'active',
         ]);
 
