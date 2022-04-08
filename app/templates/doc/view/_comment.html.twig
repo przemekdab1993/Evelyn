@@ -4,7 +4,7 @@
         <a class="top-10-comment-link-doc" href="{{ path('docShow', { docId: comment.getDoc().id}) }}">{{ comment.docTitleText | u.truncate(90, '...') }}</a>
     {% endif %}
     <div class="comment-box">
-        <span class="comment-user">{{ comment.username }}</span><span class="comment-date">{{ comment.createdAt | date("d-m-Y h:i")}}</span>
+        <span class="comment-user">{{ comment.owner.firstName }}</span><span class="comment-date">{{ comment.createdAt | date("d-m-Y h:i")}}</span>
         <p class="comment-content">{{ comment.comment }}</p>
     </div>
     {% if commentTop | default(false) %}

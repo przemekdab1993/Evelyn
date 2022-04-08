@@ -45,7 +45,6 @@ final class CommentFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'userName' => UserFactory::random()->getFirstName(),
             'comment' => self::faker()->text(300),
             //'createdAt' => self::faker()->dateTimeBetween('-50 days', 'now'),
             //'updatedAt' => self::faker()->dateTimeBetween('-50 days', 'now'),

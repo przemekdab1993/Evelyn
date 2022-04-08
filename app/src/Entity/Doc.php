@@ -72,6 +72,12 @@ class Doc
      */
     private $docAuthors;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="docs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
 
     public function __construct()
     {
@@ -272,6 +278,18 @@ class Doc
                 $docAuthor->setDoc(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

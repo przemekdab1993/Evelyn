@@ -30,11 +30,6 @@ class AppFixtures extends Fixture
             'status' => 'active',
             'roles' => ['ROLE_ADMIN']
         ]);
-        UserFactory::createOne([
-            'email' => 'andrzejduda@gmail.com',
-            'plainPassword' => 'dupa',
-            'status' => 'active',
-        ]);
 
         TagFactory::createMany(60);
         AuthorFactory::createMany(5);
@@ -50,8 +45,12 @@ class AppFixtures extends Fixture
 
 
 
-        CommentFactory::createMany(50);
-        CommentFactory::new()->needsApproval()->many(10)->create();
+        CommentFactory::createMany(50, function () {
+            return ['owner' => UserFactory::random()];
+        });
+        CommentFactory::new()->needsApproval()->many(10)->create(function () {
+            return ['owner' => UserFactory::random()];
+        });
 
     }
 }

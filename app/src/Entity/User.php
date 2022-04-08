@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -73,6 +75,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var
      */
     private $plainPassword;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="owner")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Doc::class, mappedBy="owner")
+     */
+    private $docs;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->docs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -239,5 +257,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getDisplayName(): string
     {
         return $this->getFirstName() ?: $this->getEmail();
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getOwner() === $this) {
+                $comment->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Doc[]
+     */
+    public function getDocs(): Collection
+    {
+        return $this->docs;
+    }
+
+    public function addDoc(Doc $doc): self
+    {
+        if (!$this->docs->contains($doc)) {
+            $this->docs[] = $doc;
+            $doc->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDoc(Doc $doc): self
+    {
+        if ($this->docs->removeElement($doc)) {
+            // set the owning side to null (unless already changed)
+            if ($doc->getOwner() === $this) {
+                $doc->setOwner(null);
+            }
+        }
+
+        return $this;
     }
 }

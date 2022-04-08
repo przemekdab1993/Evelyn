@@ -28,11 +28,6 @@ class Comment
     /**
      * @ORM\Column(type="text")
      */
-    private $userName;
-
-    /**
-     * @ORM\Column(type="text")
-     */
     private $comment;
 
     /**
@@ -51,21 +46,15 @@ class Comment
      */
     private $vote = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $owner;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserName(): ?string
-    {
-        return $this->userName;
-    }
-
-    public function setUserName(string $userName): self
-    {
-        $this->userName = $userName;
-
-        return $this;
     }
 
     public function getComment(): ?string
@@ -135,6 +124,18 @@ class Comment
     public function upVote(): self
     {
         $this->vote++;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }

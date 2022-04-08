@@ -49,7 +49,7 @@ final class UserFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'email' => self::faker()->email(),
+            //'email' => self::faker()->email(),
             'plainPassword' => 'duda',
             'roles' => [],
             'firstName' => self::faker()->firstName(),
@@ -69,6 +69,9 @@ final class UserFactory extends ModelFactory
                      $user->setPassword(
                          $this->passwordHasher->hashPassword($user, $user->getPlainPassword())
                      );
+                 }
+                 if (!$user->getEmail()) {
+                     $user->setEmail(strtolower($user->getFirstName()).'_'.strtolower($user->getLastName()).'@gmail.com');
                  }
              })
         ;

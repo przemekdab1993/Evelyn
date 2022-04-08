@@ -46,6 +46,7 @@ final class DocFactory extends ModelFactory
             'createdDate' => self::faker()->dateTimeBetween('-60 days', 'now'),
             'docRating' => DocRatingFactory::new()->create(),
             'tags' => TagFactory::randomRange(1, 3),
+            'owner' => UserFactory::random(),
             'active' => true,
         ];
     }
