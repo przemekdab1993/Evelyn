@@ -12,5 +12,9 @@
     {% for flush in app.flashes('success') %}
         <div class="alert alert-success"> {{ flush }} </div>
     {% endfor %}
+
+    {% for flush in app.flashes('error') %}
+        <div class="alert alert-danger"> {{ flush }} </div>
+    {% endfor %}
 </div>
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
@@ -64,8 +66,26 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify', name: 'verify_email')]
-    public function verify()
+    public function verify(Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository)
     {
+        $user = $userRepository->find($request->query->get('id'));
 
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        try {
+            $verifyEmailHelper->validateEmailConfirmation(
+                $request->getUri(),
+                $user->getId(),
+                $user->getEmail()
+            );
+        } catch (VerifyEmailExceptionInterface $e) {
+            $this->addFlash('error', $e->getReason());
+
+            return $this->redirectToRoute('registration_thx');
+        }
+
+        dd('to do');
     }
 }
