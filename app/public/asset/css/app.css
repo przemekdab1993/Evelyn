@@ -320,3 +320,8 @@ body {
     left: unset;
     right: 0;
 }
+.admin-block-bar {
+    border: 2px solid #fc0000;
+    padding: 10px;
+    margin-top: 10px;
+}

@@ -88,6 +88,24 @@ class DocController extends BaseController
         ]);
     }
 
+    #[Route('/doc/edit/{docId}', name: 'docEdit')]
+    public function edit($docId, EntityManagerInterface $entityManager): Response
+    {
+        $repository = $entityManager->getRepository(Doc::class);
+        $docOne = $repository->findOneBy(['id'=>$docId, 'active'=>true]);
+
+        $this->denyAccessUnlessGranted('EDIT', $docOne);
+
+
+        if (!$docOne) {
+            throw $this->createNotFoundException('Wybrana strona nie została odnaleziona');
+        }
+
+        return $this->render('doc/edit.html.twig', [
+            'doc' => $docOne,
+        ]);
+    }
+
 
     #[Route('/doc/{docId}/vote', name: 'docVote', methods: 'POST')]
     public function voteDoc(Request $request, EntityManagerInterface $entityManager): Response
