@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+<div class="box-content">
+    <h1>Sing Up Thx</h1>
+</div>
+
+<div class="box-content-2">
+
+    {% for flush in app.flashes('success') %}
+        <div class="alert alert-success"> {{ flush }} </div>
+    {% endfor %}
+</div>
+{% endblock %}

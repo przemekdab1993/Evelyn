@@ -12,11 +12,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, UserAuthenticatorInterface $userAuthenticator, FormLoginAuthenticator $formLoginAuthenticator): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, VerifyEmailHelperInterface $verifyEmailHelper): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -37,15 +38,34 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // do anything else you need here, like send an email
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $formLoginAuthenticator,
-                $request
+            $signatureComponents = $verifyEmailHelper->generateSignature(
+                'verify_email',
+                $user->getId(),
+                $user->getEmail(),
+                [ 'id' => $user->getId() ]
             );
+
+            // TODO: in a real app, send this as an email!
+            $this->addFlash('success', 'Confirm your email at: '.$signatureComponents->getSignedUrl());
+
+
+            return $this->redirectToRoute('registration_thx');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    #[Route('/registration/thx', name: 'registration_thx')]
+    public function registrationThx(): Response
+    {
+        return $this->render('registration/thx.html.twig');
+    }
+
+    #[Route('/verify', name: 'verify_email')]
+    public function verify()
+    {
+
     }
 }

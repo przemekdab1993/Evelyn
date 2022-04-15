@@ -54,9 +54,10 @@ final class UserFactory extends ModelFactory
             'roles' => [],
             'firstName' => self::faker()->firstName(),
             'lastName' => self::faker()->lastName(),
-            'status' => self::faker()->randomElement(User::USER_STATUS),
+            'status' => User::USER_STATUS['ACTIVE'],
             'createdAt' => new \DateTime(),
             'updatedAt' => new \DateTime(),
+            'isVerified' => true
         ];
     }
 

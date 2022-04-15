@@ -24,22 +24,20 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            entry_point: form_login
-            #entry_point: App\Security\LoginFormAuthenticator
-            #custom_authenticator: App\Security\LoginFormAuthenticator
+            #entry_point: form_login
+            entry_point: App\Security\LoginFormAuthenticator
+            custom_authenticator: App\Security\LoginFormAuthenticator
 
-            form_login:
-                login_path: login
-                check_path: login
-
-                enable_csrf: true
-
-                username_parameter: email
-                password_parameter: password
-                csrf_parameter: _csrf_token
-                csrf_token_id: authenticate
-
-
+#            form_login:
+#                login_path: login
+#                check_path: login
+#
+#                enable_csrf: true
+#
+#                username_parameter: email
+#                password_parameter: password
+#                csrf_parameter: _csrf_token
+#                csrf_token_id: authenticate
 
             logout:
                 path: /logout
@@ -50,12 +48,11 @@ security:
                 always_remember_me: true
                 signature_properties: [password]
 
-            switch_user: true
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
             # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
