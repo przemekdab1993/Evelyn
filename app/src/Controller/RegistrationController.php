@@ -66,7 +66,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify', name: 'verify_email')]
-    public function verify(Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository)
+    public function verify(Request $request, VerifyEmailHelperInterface $verifyEmailHelper, UserRepository $userRepository, EntityManagerInterface $entityManager)
     {
         $user = $userRepository->find($request->query->get('id'));
 
@@ -86,6 +86,12 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('registration_thx');
         }
 
-        dd('to do');
+        $user->setIsVerified(true);
+        $user->setStatus(User::USER_STATUS['ACTIVE']);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Account Verified!!! You can now log in :)');
+
+        return $this->redirectToRoute('registration_thx');
     }
 }
