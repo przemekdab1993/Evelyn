@@ -102,9 +102,14 @@ class RegistrationController extends AbstractController
         return $this->redirectToRoute('registration_thx');
     }
 
-    #[Route('/verify/resend', name: 'register_verify_resend_email')]
+    #[Route('/verify/resend', name: 'register_verify_resend_email', methods: ['POST', 'GET'])]
     public function resendVerifiedEmail(Request $request)
     {
+        if (!$request->query->get('userId') || !$request->query->get('userEmail')) {
+            throw new \Exception('Bad request values');
+        }
+
+        //dd($request);
         $userId = $request->query->get('userId');
         $userEmail = $request->query->get('userEmail');
 
