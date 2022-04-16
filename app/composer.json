@@ -21,6 +21,7 @@
         "pagerfanta/twig": "^3.5",
         "phpdocumentor/reflection-docblock": "^5.3",
         "scheb/2fa-bundle": "^5.13",
+        "scheb/2fa-totp": "^5.13",
         "sensio/framework-extra-bundle": "^6.2",
         "stof/doctrine-extensions-bundle": "^1.5.0",
         "symfony/asset": "5.3.*",
