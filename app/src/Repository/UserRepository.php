@@ -29,7 +29,7 @@ class UserRepository extends ServiceEntityRepository
     public function findActiveUserByEmail($email): ?User
     {
         return $this->createQueryBuilder('user')
-            ->addCriteria(self::createActiveUsersCriteria())
+            //->addCriteria(self::createActiveUsersCriteria())
             ->andWhere('user.email = :email')
             ->setParameter('email', $email)
             ->getQuery()
