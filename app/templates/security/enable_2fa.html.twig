@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+    <div class="box-content">
+        <h1>Panel logowania</h1>
+    </div>
+
+    <div class="box-content-2">
+        <div class="container">
+            <div class="row">
+                <div class="enable-2fa mt-4 p-4">
+                    <h2>Use Authy or Google Authenticator to scan the QR Code</h2>
+                    <img src="{{ path('qr_code') }}" alt="2fa QR Code" />
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
