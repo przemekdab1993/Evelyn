@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ doc.title }} - Artykuł{% endblock %}
+
+{% block body %}
+    <div class="box-content">
+        <h1>Treść Artykułu</h1>
+    </div>
+
+    <div class="box-content-2">
+        <div class="blog-doc-content">
+            <h2>{{ doc.title}}</h2>
+            <p>{{ doc.lead | duda }}</p>
+            <p>{{ doc.text | markdown }}</p>
+            </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+{% endblock %}

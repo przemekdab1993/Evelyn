@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Głosowanie{% endblock %}
+
+{% block body %}
+    <div class="box-content">
+        <h1>Witaj na głosowaniu.</h1>
+        <p>W tym głosowaniu wybieramy przedstawiciela naszej grupy.</p>
+    </div>
+
+    <div class="box-content-2">
+        <h3>Oto lista kandydatów. Oddaj swój głos.</h3>
+        <ul class="vote-list">
+            {% for user in votes %}
+                <li id="vote-user-{{ user.id }}">
+                    {{ user.name }}
+                    <span class="count-vote"> {{ user.vote }}</span>
+                    <span><a class="vote-up" href="#" data-user-id="{{ user.id }}" data-direction="up">up(+)</a></span>
+                    /
+                    <span><a class="vote-down" href="#" data-user-id="{{ user.id }}" data-direction="down">down(-)</a></span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+    <script type="text/javascript" src="{{ asset('asset/js/vote.js') }}"></script>
+{% endblock %}

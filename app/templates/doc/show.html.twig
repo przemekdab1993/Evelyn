@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ doc.title }} - Artykuł {% endblock %}
+
+{% block body %}
+    <div class="box-content">
+        <h1>Treść Artykułu</h1>
+    </div>
+
+    <div class="box-content-2">
+        <div class="blog-doc-content">
+            <div class="blog-title">
+                <h2>{{ doc.title }}</h2>
+                {% if doc.lead %}
+                    <span>{{ doc.lead }}</span>
+                {% endif %}
+            </div>
+            <div class="blog-content">
+                <p>{{ doc.content }}</p>
+            </div>
+            <div class="blog-bar">
+                <div class="blog-bar-date">
+                    Data dodania: <span>{{ doc.createdDate | date("d-m-Y") }}</span>
+                </div>
+
+                {% if (doc.tags | length) > 0 %}
+                    <div class="blog-bar-tags">
+                        Tags:
+                        {% for tag in doc.tags %}
+                            <span>#{{ tag.name }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if (doc.docAuthors | length) > 0 %}
+                    <div class="blog-bar-author">
+                        {% for docAuthor in doc.docAuthors %}
+                            <span>Autor: <b>{{ docAuthor.author.name }} {{ docAuthor.author.surName }}</b></span>
+                            <p>{{ docAuthor.author.description }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {# panel do oddawania głosów na artykuł #}
+                {{  include('doc/view/_ratingDoc.html.twig',[]) }}
+            </div>
+
+
+            <div class="blog-doc-comment">
+                <h3>Komentarze</h3>
+                <ul class="comment-list">
+                    {% if doc.approvedComments | length > 0 %}
+                        {% for comment in doc.approvedComments %}
+                            {# widok pojedynczego komentarza #}
+                            {{  include('doc/view/_comment.html.twig',[]) }}
+                        {% endfor %}
+                    {% else %}
+                        <li class="comment-list-item"><span>Brak komentarzy do artykułu</span></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_end %}
+    <script src={{ asset('asset/js/voteDoc.js') }}></script>
+    <script src={{ asset('asset/js/voteComment.js') }}></script>
+{% endblock %}

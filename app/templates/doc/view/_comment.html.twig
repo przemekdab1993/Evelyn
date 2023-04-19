@@ -1,0 +1,32 @@
+<li class="comment-list-item">
+    {% if commentTop | default(false) %}
+        <div class="top-10-place">{{ loop.index }}.</div>
+        <a class="top-10-comment-link-doc" href="{{ path('docShow', { docId: comment.getDoc().id}) }}">{{ comment.docTitleText | u.truncate(90, '...') }}</a>
+    {% endif %}
+    <div class="comment-box">
+        <div class="mb-2">
+            <img
+                    src="{{ comment.owner.avatarUrl }}"
+                    alt="{{ comment.owner.firstName }} {{ comment.owner.lastName }} Avatar">
+            <span class="comment-user">{{ comment.owner.firstName }}</span><span class="comment-date">{{ comment.createdAt | date("d-m-Y h:i")}}</span>
+        </div>
+        <p class="comment-content">{{ comment.comment }}</p>
+    </div>
+    {% if commentTop | default(false) %}
+{#        <div class="comment-vote">#}
+{#            Liczba głosów: <span class="comment-vote-count">{{ comment.vote }}</span>#}
+{#        </div>#}
+    {% else %}
+        <div class="comment-vote">
+            Liczba głosów:
+            <span class="comment-vote-count" id="comment-vote-{{ comment.id }}">
+                {{ comment.vote }}
+            </span>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <a class="link-vote link-vote-up" data-comment-id="{{ comment.id }}" data-direction="up">
+                <span>Podoba mi się</span>
+            </a>
+            {% endif %}
+        </div>
+    {% endif %}
+</li>

@@ -1,0 +1,49 @@
+<li class="blog-list-element">
+    <a href="{{ path('docShow', { "docId": doc.id }) }}">
+        <div class="blog-title">
+            <h2>{{ doc.title }}</h2>
+            {% if doc.lead %}
+                <span>{{ doc.lead }}</span>
+            {% endif %}
+        </div>
+        <span class="read-more">Czytaj więcej &raquo;</span>
+    </a>
+    <div class="blog-bar">
+        {% if date(doc.createdDate) >  ( date("-1 month")) %}
+            <div class="blog-date">
+                Data dodania:
+                <span>{{ doc.createdDate | ago }}</span>
+            </div>
+        {% else %}
+            <div class="blog-date">
+                Data dodania:
+                <span>{{ doc.createdDate | date("d-m-Y") }}</span>
+            </div>
+        {% endif %}
+        {% if (doc.docAuthors | length) > 0 %}
+            <div class="blog-author">
+                Autor:
+                {% for docAuthor in doc.docAuthors %}
+                    <span>{{ docAuthor.author.name }} {{ docAuthor.author.surName }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if (doc.tags | length) > 0 %}
+            <div class="blog-tags">
+                Tags:
+                {% for tag in doc.tags %}
+                    <span>#{{ tag.name }}</span>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </div>
+    {% if is_granted('EDIT', doc) %}
+    <div class="admin-block-bar">
+        <div class="admin-bar">
+            <span>Panel admina:  </span>
+            <a href="{{ path('docEdit', { 'docId' : doc.id}) }}" class="btn btn-secondary">Edytuj dokument >></a>
+        </div>
+    </div>
+    {% endif %}
+</li>
